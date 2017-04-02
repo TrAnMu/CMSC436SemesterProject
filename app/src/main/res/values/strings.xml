@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Flow</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="map_menu_option">Map</string>
+    <string name="explore_menu_option">Explore</string>
+    <string name="account_menu_option">Account</string>
+    <string name="settings_menu_option">Settings</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
