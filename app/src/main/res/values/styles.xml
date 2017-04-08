@@ -17,4 +17,19 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="profileTextView">
+        <item name="android:textSize">@dimen/profile_text_size</item>
+        <item name="android:layout_marginTop">@dimen/profile_margin_wider</item>
+    </style>
+
+    <style name="profileTileTextView">
+        <item name="android:textSize">@dimen/profile_title_text_size</item>
+        <item name="android:layout_marginTop">@dimen/profile_margin_wider</item>
+    </style>
+
+    <style name="profileButtonView">
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_marginTop">@dimen/profile_margin_wider</item>
+        <item name="android:background"></item>
+    </style>
 </resources>
