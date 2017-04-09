@@ -9,22 +9,19 @@ import java.util.List;
 
 public class UserInfo {
     private String username;
-    private List<String> friends;
-    private List<String> favLocation;
+    private String password;
     private String profile_pic = "@drawable/place_holder";
-    private List<String> likedEvent = null;
-    private List<String> travelledPlace = null;
+    private List<String> friends = new ArrayList<String>();
+    private List<String> favLocation = new ArrayList<String>();
+    private List<String> likedEvent = new ArrayList<String>();
+    private List<String> travelledPlace = new ArrayList<String>();
 
-    public UserInfo(String user) {
-        username = user;
-        friends = null;
-        favLocation = null;
+    public UserInfo() {
     }
 
-    public UserInfo(String user, List<String> friend, List<String> favLoc) {
+    public UserInfo(String user, String pass) {
         username = user;
-        friends = friend;
-        favLocation = favLoc;
+        password = pass;
     }
 
     public String getUsername() {
@@ -36,20 +33,11 @@ public class UserInfo {
     }
 
     public void addFriend(String user) {
-        if (friends != null) {
-            friends.add(user);
-        } else {
-            friends = new ArrayList<String>();
-            friends.add(user);
-        }
+        friends.add(user);
     }
 
     public void addFriend(List<String> users) {
-        if (friends != null) {
-            friends.addAll(users);
-        } else {
-            friends = users;
-        }
+        friends.addAll(users);
     }
 
     public List<String> getFavLocations() {
@@ -57,20 +45,11 @@ public class UserInfo {
     }
 
     public void addFavLocation(String loc) {
-        if (favLocation != null) {
-            favLocation.add(loc);
-        } else {
-            favLocation = new ArrayList<String>();
-            favLocation.add(loc);
-        }
+        favLocation.add(loc);
     }
 
     public void addFavLocation(List<String> locs) {
-        if (favLocation != null) {
-            favLocation.addAll(locs);
-        } else {
-            favLocation = locs;
-        }
+        favLocation.addAll(locs);
     }
 
     public void setProfilePic(String img_address) {
@@ -99,5 +78,15 @@ public class UserInfo {
 
     public List<String> getTravelledLocation() {
         return travelledPlace;
+    }
+
+    @Override
+    public String toString() {
+        return "username=" + username +
+                ", profilePic=" + profile_pic +
+                ", friends=" + friends  +
+                ", Fav Location=" + favLocation +
+                ", Liked Events=" + likedEvent +
+                ", Places Traveled=" + travelledPlace;
     }
 }

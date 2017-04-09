@@ -14,13 +14,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import groupproject.cmsc436.flow.Service.DatabaseService;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DatabaseService DBService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DBService = DatabaseService.getDBService(this.getApplicationContext());
+//        DBService.signUp("admin", "pass");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
