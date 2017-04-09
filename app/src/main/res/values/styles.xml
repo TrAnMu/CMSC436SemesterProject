@@ -30,6 +30,6 @@
     <style name="profileButtonView">
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:layout_marginTop">@dimen/profile_margin_wider</item>
-        <item name="android:background"></item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

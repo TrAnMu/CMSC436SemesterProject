@@ -16,4 +16,5 @@
     <string name="profile_favorite_location_title">Favorite Location(s)</string>
 
     <string name="view_all_button_text">View All</string>
+    <string name="edit">Edit</string>
 </resources>
