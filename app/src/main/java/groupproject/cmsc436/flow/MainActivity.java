@@ -1,10 +1,10 @@
 package groupproject.cmsc436.flow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,14 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import groupproject.cmsc436.flow.Service.DatabaseService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DatabaseService DBService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DBService = DatabaseService.getDBService(this.getApplicationContext());
+//        DBService.signUp("admin", "pass");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -86,6 +93,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_explore) {
 
         } else if (id == R.id.nav_account) {
+            Intent activeSprintIntent = new Intent(this, ProfileActivity.class);
+            startActivity(activeSprintIntent);
+            return true;
 
         } else if (id == R.id.nav_settings) {
 
