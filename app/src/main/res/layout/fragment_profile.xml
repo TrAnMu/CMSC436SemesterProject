@@ -47,18 +47,25 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/profile_margin_wider"
-        android:layout_marginRight="@dimen/profile_margin_wider">
+        android:layout_marginRight="@dimen/profile_margin_wider"
+        android:orientation="horizontal">
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/profile_edit_button"
             android:text="@string/edit"
-            android:layout_gravity="center"/>
-    </RelativeLayout>
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_log_out_button"
+            android:text="@string/log_out"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

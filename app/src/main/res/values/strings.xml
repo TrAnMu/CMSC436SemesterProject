@@ -20,6 +20,7 @@
     <string name="auth_failed">Authentication failed</string>
     <string name="none_fields_blank">None of these fields can be empty!</string>
     <string name="cancel">Cancel</string>
+    <string name="log_out">Log Out</string>
 
     <string name="register_username">Username(Email)</string>
     <string name="register_password">Password</string>
@@ -40,4 +41,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="ask_register_text">No account? Don\'t worry, you can register here!</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,24 +27,28 @@ public class LogInFragment extends Fragment {
     private AutoCompleteTextView emailTextView;
     private EditText passwordTextView;
     private Button signInButton;
+    private Button registerButton;
 
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+        Log.e("User", "On create");
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                    Log.e("User", "Get to MainActivity");
                     startActivity(intent);
                     getActivity().finish();
                 } else {
-                    Intent intent = new Intent(getActivity().getApplicationContext(), LogInActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+//                    Intent intent = new Intent(getActivity().getApplicationContext(), LogInActivity.class);
+//                    Log.e("User", "Get to LoginActivity");
+//                    startActivity(intent);
+//                    getActivity().finish();
                 }
             }
         };
@@ -70,6 +75,7 @@ public class LogInFragment extends Fragment {
         emailTextView = (AutoCompleteTextView) view.findViewById(R.id.email);
         passwordTextView = (EditText) view.findViewById(R.id.password);
         signInButton = (Button) view.findViewById(R.id.email_sign_in_button);
+        registerButton = (Button) view.findViewById(R.id.action_register_button);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +92,13 @@ public class LogInFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(getActivity().getApplicationContext(), RegistrationActivity.class);
+                startActivity(registerIntent);
             }
         });
         return view;

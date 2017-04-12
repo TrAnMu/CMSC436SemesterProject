@@ -86,4 +86,8 @@ public class DatabaseService {
                     }
                 });
     }
+
+    public void signOut() {
+        FirebaseAuth.getInstance().signOut();
+    }
 }

@@ -109,16 +109,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    // these two functions are just for testing...
-    // Will be removed once the login and registration pages are working
-    public void goToRegister(View v) {
-        Intent registerIntent = new Intent(this, RegistrationActivity.class);
-        startActivity(registerIntent);
-    }
-
-    public void goToSignIn(View v) {
-        Intent loginIntent = new Intent(this, LogInActivity.class);
-        startActivity(loginIntent);
-    }
 }
