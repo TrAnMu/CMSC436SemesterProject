@@ -17,4 +17,27 @@
 
     <string name="view_all_button_text">View All</string>
     <string name="edit">Edit</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="none_fields_blank">None of these fields can be empty!</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="register_username">Username(Email)</string>
+    <string name="register_password">Password</string>
+    <string name="register_repeat_password">Re-type password</string>
+    <string name="register_nickname">Nickname(Can be changed)</string>
+    <string name="register_registration_button">Register!</string>
+    <string name="title_activity_log_in">Log In</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>

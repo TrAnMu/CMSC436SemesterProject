@@ -32,4 +32,16 @@
         <item name="android:layout_marginTop">@dimen/profile_margin_wider</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="RegisterViewTitle">
+        <item name="android:textSize">@dimen/register_title_text_size</item>
+        <item name="android:layout_marginLeft">@dimen/register_margin</item>
+        <item name="android:layout_marginTop">@dimen/register_margin</item>
+    </style>
+
+    <style name="RegisterViewInput">
+        <item name="android:textSize">@dimen/register_input_text_size</item>
+        <item name="android:layout_marginLeft">@dimen/register_margin</item>
+        <item name="android:layout_marginRight">@dimen/register_margin</item>
+    </style>
 </resources>

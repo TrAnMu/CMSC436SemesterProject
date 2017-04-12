@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_explore) {
 
         } else if (id == R.id.nav_account) {
-            Intent activeSprintIntent = new Intent(this, ProfileActivity.class);
-            startActivity(activeSprintIntent);
+            Intent accountIntent = new Intent(this, ProfileActivity.class);
+            startActivity(accountIntent);
             return true;
 
         } else if (id == R.id.nav_settings) {
@@ -108,5 +108,17 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // these two functions are just for testing...
+    // Will be removed once the login and registration pages are working
+    public void goToRegister(View v) {
+        Intent registerIntent = new Intent(this, RegistrationActivity.class);
+        startActivity(registerIntent);
+    }
+
+    public void goToSignIn(View v) {
+        Intent loginIntent = new Intent(this, LogInActivity.class);
+        startActivity(loginIntent);
     }
 }
