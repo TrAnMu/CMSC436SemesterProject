@@ -17,4 +17,5 @@
 
     <string name="view_all_button_text">View All</string>
     <string name="edit">Edit</string>
+    <string name="title_activity_explore">Map</string>
 </resources>
