@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_map) {
-            
+            Intent mapIntent = new Intent(this, MapActivity.class);
+            startActivity(mapIntent);
+            return true;
         } else if (id == R.id.nav_explore) {
 
         } else if (id == R.id.nav_account) {
