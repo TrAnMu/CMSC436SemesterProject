@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,21 +33,14 @@ public class LogInFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("User", "On create");
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                    Log.e("User", "Get to MainActivity");
                     startActivity(intent);
                     getActivity().finish();
-                } else {
-//                    Intent intent = new Intent(getActivity().getApplicationContext(), LogInActivity.class);
-//                    Log.e("User", "Get to LoginActivity");
-//                    startActivity(intent);
-//                    getActivity().finish();
                 }
             }
         };
@@ -87,7 +79,6 @@ public class LogInFragment extends Fragment {
                 } else {
                     try {
                         DatabaseService.getDBService(getActivity().getApplicationContext()).signIn(email, password);
-                        getActivity().finish();
                     } catch (Exception e) {
                         Toast.makeText(getActivity().getApplicationContext(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
                     }
