@@ -17,6 +17,7 @@
 
     <string name="view_all_button_text">View All</string>
     <string name="edit">Edit</string>
+
     <string name="auth_failed">Authentication failed</string>
     <string name="none_fields_blank">None of these fields can be empty!</string>
     <string name="cancel">Cancel</string>
@@ -42,4 +43,5 @@
         completions."
     </string>
     <string name="ask_register_text">No account? Don\'t worry, you can register here!</string>
+    <string name="title_activity_explore">Map</string>
 </resources>
