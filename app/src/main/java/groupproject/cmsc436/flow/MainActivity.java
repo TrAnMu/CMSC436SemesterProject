@@ -95,8 +95,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_explore) {
 
         } else if (id == R.id.nav_account) {
-            Intent activeSprintIntent = new Intent(this, ProfileActivity.class);
-            startActivity(activeSprintIntent);
+            Intent accountIntent = new Intent(this, ProfileActivity.class);
+            startActivity(accountIntent);
             return true;
 
         } else if (id == R.id.nav_settings) {

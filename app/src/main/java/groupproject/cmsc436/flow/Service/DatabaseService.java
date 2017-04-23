@@ -1,8 +1,13 @@
 package groupproject.cmsc436.flow.Service;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,8 +51,43 @@ public class DatabaseService {
         });
         return instance;
     }
-    public void signUp(String user, String pass) {
-        UserInfo userInfo = new UserInfo(user, pass);
-        databaseReference.child(userInfo.getUsername()).setValue(userInfo);
+    public void signUp(String email, String password) throws Exception {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            throw new IllegalArgumentException();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    public void signIn(String email, String password) throws Exception{
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            throw new IllegalArgumentException();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    public void signOut() {
+        FirebaseAuth.getInstance().signOut();
     }
 }
