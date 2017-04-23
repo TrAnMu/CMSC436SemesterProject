@@ -12,12 +12,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import groupproject.cmsc436.flow.Event;
 import groupproject.cmsc436.flow.UserInfo;
 
 /**
@@ -30,6 +30,12 @@ public class DatabaseService {
 
     private static DatabaseReference databaseReference;
     private static Map<String, UserInfo> users;
+    private static Map<String, Event> allEvents = new HashMap<>();
+
+    private static String EVENT = "event";
+
+    private DatabaseReference dbRef;
+
 
     public static DatabaseService getDBService(Context context) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -39,8 +45,21 @@ public class DatabaseService {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                GenericTypeIndicator<HashMap<String, UserInfo>> t = new GenericTypeIndicator<HashMap<String, UserInfo>>() {};
-                users = dataSnapshot.getValue(t);
+
+                Map<String, HashMap<String, HashMap<String, Object>>> map = (Map<String, HashMap<String, HashMap<String, Object>>>) dataSnapshot.getValue();
+                HashMap<String, HashMap<String, Object>> events = map.get(EVENT);
+                for (Map.Entry<String, HashMap<String, Object>> entry: events.entrySet()) {
+                    if (!allEvents.containsKey(entry.getKey())) {
+                        HashMap<String, Object> eventValues = entry.getValue();
+                        String eventName = eventValues.get("eventName").toString();
+                        Double longtitude = Double.parseDouble(eventValues.get("longtitude").toString());
+                        Double lat = Double.parseDouble(eventValues.get("latitude").toString());
+                        String host = eventValues.get("hostName").toString();
+                        Event event = new Event(eventName, longtitude, lat, host);
+                        allEvents.put(eventName, event);
+                    }
+                    Log.d("events", allEvents.toString());
+                }
             }
 
             @Override
@@ -89,5 +108,14 @@ public class DatabaseService {
 
     public void signOut() {
         FirebaseAuth.getInstance().signOut();
+    }
+
+    public void addEvent(Event event) {
+        dbRef = FirebaseDatabase.getInstance().getReference();
+        dbRef.child(EVENT).child(event.getEventName()).setValue(event);
+    }
+
+    public Event getEvent(String eventName) {
+        return allEvents.get(eventName);
     }
 }
