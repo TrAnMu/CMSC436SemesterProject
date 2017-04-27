@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import groupproject.cmsc436.flow.DataModel;
+import groupproject.cmsc436.flow.R;
+
 public class SettingsAdapter extends ArrayAdapter<DataModel> implements View.OnClickListener{
 
     private ArrayList<DataModel> dataSet;

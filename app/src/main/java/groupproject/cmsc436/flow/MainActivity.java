@@ -100,10 +100,10 @@ public class MainActivity extends AppCompatActivity
             return true;
 
         } else if (id == R.id.nav_settings) {
-
             Intent settingIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingIntent);
             return true;
+
 
         } else if (id == R.id.nav_share) {
 
@@ -116,15 +116,3 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
