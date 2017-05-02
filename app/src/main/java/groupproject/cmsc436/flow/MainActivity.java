@@ -118,4 +118,9 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void addEvent(View view){
+        Event newE = new Event("3 events", -12.5, 99.15, "Me Me Me");
+        DBService.addEvent(newE);
+    }
 }
