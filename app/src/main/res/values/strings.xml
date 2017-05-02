@@ -44,4 +44,17 @@
     </string>
     <string name="ask_register_text">No account? Don\'t worry, you can register here!</string>
     <string name="title_activity_explore">Map</string>
+
+    <string-array name="filter_array">
+        <item>Filter 1</item>
+        <item>Filter 2</item>
+        <item>Filter 3</item>
+    </string-array>
+
+    <string-array name="sort_array">
+        <item>Sort 1</item>
+        <item>Sort 2</item>
+        <item>Sort 3</item>
+    </string-array>
+
 </resources>
