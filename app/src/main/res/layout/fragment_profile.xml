@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
         android:layout_marginTop="@dimen/profile_margin_wider"
         android:layout_marginBottom="@dimen/profile_margin_wider">
@@ -22,7 +22,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/profile_margin">
+            android:layout_marginLeft="@dimen/profile_margin"
+            android:layout_gravity="left">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,115 +31,42 @@
                 android:hint="@string/profile_username_hint"
                 style="@style/profileTextView"
                 android:layout_alignParentTop="true"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/profile_name"
+                android:layout_below="@id/profile_username">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/firstname"
+                    android:id="@+id/profile_firstname"
+                    style="@style/profileTextView"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lastname"
+                    android:id="@+id/profile_lastname"
+                    style="@style/profileTextView"/>
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_likes"
-                android:hint="@string/profile_like_events_hint"
+                android:hint="@string/profile_like_received"
                 style="@style/profileTextView"
-                android:layout_below="@id/profile_username"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/profile_places_travel"
-                android:hint="@string/profile_places_travel"
-                style="@style/profileTextView"
-                android:layout_below="@id/profile_likes"/>
+                android:layout_below="@id/profile_name"/>
         </RelativeLayout>
     </LinearLayout>
-
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/profile_margin_wider"
         android:layout_marginRight="@dimen/profile_margin_wider"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/profile_edit_button"
-            android:text="@string/edit"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/profile_log_out_button"
-            android:text="@string/log_out"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/profile_margin">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:id="@+id/profile_friend_title">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/profile_friend_title"
-                android:layout_alignParentLeft="true"
-                style="@style/profileTileTextView"/>
-            <Button
-                android:id="@+id/profile_friends_view_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@drawable/view_all_button"
-                android:background="@android:color/transparent"
-                android:text="@string/view_all_button_text"/>
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/friends_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:layout_below="@id/profile_friend_title"
-            android:layout_marginLeft="@dimen/profile_margin"
-            android:layout_marginRight="@dimen/profile_margin">
-        </android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/profile_margin">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:id="@+id/profile_favLocations_title">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/profile_favorite_location_title"
-                android:layout_alignParentLeft="true"
-                style="@style/profileTileTextView"/>
-            <Button
-                android:id="@+id/profile_fav_locs_view_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@drawable/view_all_button"
-                android:background="@android:color/transparent"
-                android:text="@string/view_all_button_text"/>
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/favLocation_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:layout_below="@id/profile_favLocations_title"
-            android:layout_marginLeft="@dimen/profile_margin"
-            android:layout_marginRight="@dimen/profile_margin">
-        </android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
-
+        android:id="@+id/profile_log_out_button"
+        android:text="@string/log_out"
+        android:textSize="26sp"/>
 </LinearLayout>

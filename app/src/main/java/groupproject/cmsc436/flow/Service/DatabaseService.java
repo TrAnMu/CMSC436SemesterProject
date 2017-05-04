@@ -28,26 +28,28 @@ public class DatabaseService {
     final static private String PATH = "https://cmsc436-6cb24.firebaseio.com/";
     private static final DatabaseService instance = new DatabaseService();
 
-    private static DatabaseReference databaseReference;
+    private static DatabaseReference eventReference;
+    private static DatabaseReference userReference;
     private static Map<String, UserInfo> users;
     private static Map<String, Event> allEvents = new HashMap<>();
 
     private static String EVENT = "event";
-
-    private DatabaseReference dbRef;
+    private static String USER ="user";
 
 
     public static DatabaseService getDBService(Context context) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReferenceFromUrl(PATH);
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        eventReference = database.getReference().child(EVENT);
+        userReference = database.getReference().child(USER);
+//        eventReference = database.getReferenceFromUrl(PATH).child(EVENT);
+//        userReference = database.getReferenceFromUrl(PATH).child(USER);
+        eventReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
-                Map<String, HashMap<String, HashMap<String, Object>>> map = (Map<String, HashMap<String, HashMap<String, Object>>>) dataSnapshot.getValue();
-                HashMap<String, HashMap<String, Object>> events = map.get(EVENT);
+                HashMap<String, HashMap<String, Object>> events = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
                 for (Map.Entry<String, HashMap<String, Object>> entry: events.entrySet()) {
                     if (!allEvents.containsKey(entry.getKey())) {
                         HashMap<String, Object> eventValues = entry.getValue();
@@ -68,9 +70,38 @@ public class DatabaseService {
                 Log.e("TAG", "Failed to read value.", error.toException());
             }
         });
+
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+                HashMap<String, HashMap<String, Object>> userList = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+                for (Map.Entry<String, HashMap<String, Object>> entry: userList.entrySet()) {
+                    if (!users.containsKey(entry.getKey())) {
+                        HashMap<String, Object> userValues = entry.getValue();
+                        String userID = entry.getKey();
+                        String userName = userValues.get("username").toString();
+                        String firstName = userValues.get("firstName").toString();
+                        String lastName = userValues.get("lastName").toString();
+                        long likedReceived = Long.parseLong(userValues.get("likesReceived").toString());
+                        UserInfo user = new UserInfo(userID, userName, firstName, lastName, likedReceived);
+                        users.put(userID, user);
+                    }
+                    Log.d("users", users.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.e("TAG", "Failed to read value.", error.toException());
+            }
+        });
         return instance;
     }
-    public void signUp(String email, String password) throws Exception {
+    public void signUp(final String email, final String password, final String first, final String last) throws Exception {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -80,10 +111,12 @@ public class DatabaseService {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+                            Log.d("EXCEPTION", task.toString());
                             throw new IllegalArgumentException();
                         }
-
-                        // ...
+                        String key = userReference.push().getKey();
+                        UserInfo user = new UserInfo(key, email, first, last);
+                        userReference.child(key).setValue(user);
                     }
                 });
     }
@@ -111,8 +144,7 @@ public class DatabaseService {
     }
 
     public void addEvent(Event event) {
-        dbRef = FirebaseDatabase.getInstance().getReference();
-        dbRef.child(EVENT).child(event.getEventName()).setValue(event);
+        eventReference.child(event.getEventName()).setValue(event);
     }
 
     public Event getEvent(String eventName) {

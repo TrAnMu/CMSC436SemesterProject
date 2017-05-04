@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void addEvent(View view){
-        Event newE = new Event("3 events", -12.5, 99.15, "Me Me Me");
+        Event newE = new Event("another Event", -12.5, 99.15, "Wala");
         DBService.addEvent(newE);
     }
 }

@@ -19,7 +19,6 @@ import groupproject.cmsc436.flow.Service.DatabaseService;
 public class ProfileFragment extends Fragment {
     private TextView usernameTextView;
     private TextView likesTextView;
-    private TextView placesTextView;
 
     private Button editButton;
     private Button logOutButton;
@@ -30,9 +29,6 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         usernameTextView = (TextView)view.findViewById(R.id.profile_username);
         likesTextView = (TextView)view.findViewById(R.id.profile_likes);
-        placesTextView = (TextView)view.findViewById(R.id.profile_places_travel);
-
-        editButton = (Button) view.findViewById(R.id.profile_edit_button);
         logOutButton = (Button) view.findViewById(R.id.profile_log_out_button);
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
