@@ -55,6 +55,9 @@ public class DatabaseService {
                         Double longtitude = Double.parseDouble(eventValues.get("longtitude").toString());
                         Double lat = Double.parseDouble(eventValues.get("latitude").toString());
                         String host = eventValues.get("hostName").toString();
+
+
+
                         Event event = new Event(eventName, longtitude, lat, host);
                         allEvents.put(eventName, event);
                     }
@@ -115,7 +118,9 @@ public class DatabaseService {
         dbRef.child(EVENT).child(event.getEventName()).setValue(event);
     }
 
+
     public Event getEvent(String eventName) {
         return allEvents.get(eventName);
     }
+
 }

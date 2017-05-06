@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import groupproject.cmsc436.flow.Service.DatabaseService;
 
@@ -20,11 +21,29 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DatabaseService DBService;
+    private Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        addButton = (Button) findViewById(R.id.addevent_button);
+
+        Intent createIntent = new Intent(this, CreateEventActivity.class);
+
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(getApplication().getApplicationContext(),
+                                                CreateEventActivity.class);
+                startActivity(createIntent);
+            }
+        });
+
+
+
         DBService = DatabaseService.getDBService(this.getApplicationContext());
 //        DBService.signUp("admin", "pass");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -5,15 +5,23 @@ package groupproject.cmsc436.flow;
  */
 
 public class Event {
+
+
     private String name = "";
     private double longtitude = 0;
     private double latitude = 0;
     private String hostname = "";
+    private String endTime;
+
+
+
     public Event(String eventname, double longti, double lat, String host) {
         name = eventname;
         longtitude = longti;
         latitude = lat;
         hostname = host;
+
+
     }
 
     public void setEventName (String evtname) {
@@ -35,4 +43,11 @@ public class Event {
     public String getHostName() {
         return hostname;
     }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+
+
 }
