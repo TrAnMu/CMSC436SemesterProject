@@ -57,7 +57,7 @@ public class RegistrationFragment extends Fragment {
                     Toast.makeText(getActivity(), "The two passwords you entered are different", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
-                        DatabaseService.getDBService(getActivity().getApplicationContext()).signUp(username, password, first, last);
+                        DatabaseService.getDBService().signUp(username, password, first, last);
                         getActivity().finish();
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
