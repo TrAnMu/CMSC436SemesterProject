@@ -1,6 +1,5 @@
 package groupproject.cmsc436.flow.Service;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -25,24 +24,22 @@ import groupproject.cmsc436.flow.UserInfo;
  */
 
 public class DatabaseService {
-    final static private String PATH = "https://cmsc436-6cb24.firebaseio.com/";
     private static final DatabaseService instance = new DatabaseService();
 
-    private static DatabaseReference eventReference;
-    private static DatabaseReference userReference;
-    private static Map<String, UserInfo> users;
-    private static Map<String, Event> allEvents = new HashMap<>();
+    private DatabaseReference eventReference;
+    private DatabaseReference userReference;
+    private Map<String, UserInfo> users;
+    private Map<String, Event> allEvents;
 
-    private static String EVENT = "event";
-    private static String USER ="user";
+    private String EVENT = "event";
+    private String USER ="user";
 
-
-    public static DatabaseService getDBService(Context context) {
+    private DatabaseService() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         eventReference = database.getReference().child(EVENT);
         userReference = database.getReference().child(USER);
-//        eventReference = database.getReferenceFromUrl(PATH).child(EVENT);
-//        userReference = database.getReferenceFromUrl(PATH).child(USER);
+        users = new HashMap<>();
+        allEvents = new HashMap<>();
         eventReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,8 +82,9 @@ public class DatabaseService {
                         String userName = userValues.get("username").toString();
                         String firstName = userValues.get("firstName").toString();
                         String lastName = userValues.get("lastName").toString();
+                        String picURL = (userValues.get("profilePictureURL") != null)? userValues.get("profilePictureURL").toString() : null;
                         long likedReceived = Long.parseLong(userValues.get("likesReceived").toString());
-                        UserInfo user = new UserInfo(userID, userName, firstName, lastName, likedReceived);
+                        UserInfo user = new UserInfo(userID, userName, firstName, lastName, picURL , likedReceived);
                         users.put(userID, user);
                     }
                     Log.d("users", users.toString());
@@ -99,6 +97,10 @@ public class DatabaseService {
                 Log.e("TAG", "Failed to read value.", error.toException());
             }
         });
+    }
+
+
+    public static DatabaseService getDBService () {
         return instance;
     }
     public void signUp(final String email, final String password, final String first, final String last) throws Exception {
