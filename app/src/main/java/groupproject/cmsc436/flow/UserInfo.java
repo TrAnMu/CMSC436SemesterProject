@@ -7,8 +7,7 @@ package groupproject.cmsc436.flow;
 public class UserInfo {
     private String userKey;
     private String username;
-    // private String profilePictureURL = "@drawable/place_holder";
-    private String profilePictureURL = null;
+    private boolean defaulPicture = true;
     private String firstName;
     private String lastName;
     private long likesReceived = 0;
@@ -21,12 +20,12 @@ public class UserInfo {
         likesReceived = 0;
     }
 
-    public UserInfo(String key, String user, String first, String last, String pic, long likes) {
+    public UserInfo(String key, String user, String first, String last, boolean isDefault, long likes) {
         userKey = key;
         username = user;
         firstName = first;
         lastName = last;
-        profilePictureURL = pic;
+        defaulPicture = isDefault;
         likesReceived = likes;
     }
 
@@ -54,12 +53,12 @@ public class UserInfo {
         return userKey;
     }
 
-    public void setProfilePictureURL(String url) {
-        profilePictureURL = url;
+    public void setDefaulPicture(boolean isDefault) {
+        defaulPicture = isDefault;
     }
 
-    public String getProfilePictureURL() {
-        return profilePictureURL;
+    public boolean getDefaulPicture() {
+        return defaulPicture;
     }
 
     public String getFullName() {
@@ -70,7 +69,7 @@ public class UserInfo {
         return "username=" + username +
                 ", first name=" + firstName +
                 ", last name=" + lastName +
-                ", profilePic=" + profilePictureURL +
+                ", isDefaultPic =" + defaulPicture +
                 ", Likes Received=" + likesReceived;
     }
 }

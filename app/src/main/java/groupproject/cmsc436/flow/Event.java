@@ -5,6 +5,7 @@ package groupproject.cmsc436.flow;
  */
 
 public class Event {
+    private String eventID;
     private String name = "";
     private double longtitude = 0;
     private double latitude = 0;
@@ -16,6 +17,14 @@ public class Event {
         latitude = lat;
         hostname = host;
         likes = 0;
+    }
+
+    public void setEventID(String id) {
+        eventID = (eventID == null)? id : eventID;
+    }
+
+    public String getEventID() {
+        return eventID;
     }
 
     public void setEventName (String eventname) {

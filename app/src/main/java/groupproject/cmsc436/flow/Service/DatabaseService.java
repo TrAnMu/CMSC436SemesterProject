@@ -1,9 +1,12 @@
 package groupproject.cmsc436.flow.Service;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -12,6 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +34,10 @@ public class DatabaseService {
 
     private DatabaseReference eventReference;
     private DatabaseReference userReference;
+
+    private StorageReference eventPhotoReference;
+    private StorageReference userProfileReference;
+
     private Map<String, UserInfo> users;
     private Map<String, Event> allEvents;
 
@@ -36,28 +46,32 @@ public class DatabaseService {
 
     private DatabaseService() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         eventReference = database.getReference().child(EVENT);
+        eventPhotoReference = storage.getReference().child(EVENT);
+
         userReference = database.getReference().child(USER);
+        userProfileReference = storage.getReference().child(USER);
+
         users = new HashMap<>();
         allEvents = new HashMap<>();
         eventReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-
                 HashMap<String, HashMap<String, Object>> events = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
-                for (Map.Entry<String, HashMap<String, Object>> entry: events.entrySet()) {
-                    if (!allEvents.containsKey(entry.getKey())) {
-                        HashMap<String, Object> eventValues = entry.getValue();
-                        String eventName = eventValues.get("eventName").toString();
-                        Double longtitude = Double.parseDouble(eventValues.get("longtitude").toString());
-                        Double lat = Double.parseDouble(eventValues.get("latitude").toString());
-                        String host = eventValues.get("hostName").toString();
-                        Event event = new Event(eventName, longtitude, lat, host);
-                        allEvents.put(eventName, event);
+                if (events != null) {
+                    for (Map.Entry<String, HashMap<String, Object>> entry : events.entrySet()) {
+                        if (!allEvents.containsKey(entry.getKey())) {
+                            HashMap<String, Object> eventValues = entry.getValue();
+                            String key = entry.getKey();
+                            String eventName = eventValues.get("eventName").toString();
+                            Double longtitude = Double.parseDouble(eventValues.get("longtitude").toString());
+                            Double lat = Double.parseDouble(eventValues.get("latitude").toString());
+                            String host = eventValues.get("hostName").toString();
+                            Event event = new Event(eventName, longtitude, lat, host);
+                            allEvents.put(key, event);
+                        }
                     }
-                    Log.d("events", allEvents.toString());
                 }
             }
 
@@ -75,19 +89,20 @@ public class DatabaseService {
                 // whenever data at this location is updated.
 
                 HashMap<String, HashMap<String, Object>> userList = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
-                for (Map.Entry<String, HashMap<String, Object>> entry: userList.entrySet()) {
-                    if (!users.containsKey(entry.getKey())) {
-                        HashMap<String, Object> userValues = entry.getValue();
-                        String userID = entry.getKey();
-                        String userName = userValues.get("username").toString();
-                        String firstName = userValues.get("firstName").toString();
-                        String lastName = userValues.get("lastName").toString();
-                        String picURL = (userValues.get("profilePictureURL") != null)? userValues.get("profilePictureURL").toString() : null;
-                        long likedReceived = Long.parseLong(userValues.get("likesReceived").toString());
-                        UserInfo user = new UserInfo(userID, userName, firstName, lastName, picURL , likedReceived);
-                        users.put(userID, user);
+                if (userList != null) {
+                    for (Map.Entry<String, HashMap<String, Object>> entry : userList.entrySet()) {
+                        if (!users.containsKey(entry.getKey())) {
+                            HashMap<String, Object> userValues = entry.getValue();
+                            String userID = entry.getKey();
+                            String userName = userValues.get("username").toString();
+                            String firstName = userValues.get("firstName").toString();
+                            String lastName = userValues.get("lastName").toString();
+                            boolean isDefaultPic = Boolean.parseBoolean(userValues.get("defaulPicture").toString());
+                            long likedReceived = Long.parseLong(userValues.get("likesReceived").toString());
+                            UserInfo user = new UserInfo(userID, userName, firstName, lastName, isDefaultPic, likedReceived);
+                            users.put(userID, user);
+                        }
                     }
-                    Log.d("users", users.toString());
                 }
             }
 
@@ -116,7 +131,7 @@ public class DatabaseService {
                             Log.d("EXCEPTION", task.toString());
                             throw new IllegalArgumentException();
                         }
-                        String key = userReference.push().getKey();
+                        String key = task.getResult().getUser().getUid();
                         UserInfo user = new UserInfo(key, email, first, last);
                         userReference.child(key).setValue(user);
                     }
@@ -146,10 +161,41 @@ public class DatabaseService {
     }
 
     public void addEvent(Event event) {
-        eventReference.child(event.getEventName()).setValue(event);
+        String key = eventReference.push().getKey();
+        event.setEventID(key);
+        eventReference.child(key).setValue(event);
     }
 
-    public Event getEvent(String eventName) {
-        return allEvents.get(eventName);
+    public Event getEvent(String eventID) {
+        return allEvents.get(eventID);
     }
+
+    public UserInfo getCurrentUser() {
+        return users.get(FirebaseAuth.getInstance().getCurrentUser().getUid());
+    }
+
+    public void setCurrentUserPic(final String userID, Uri photoFileUri) {
+        StorageReference profileRef = userProfileReference.child(userID+".jpg");
+        UploadTask uploadTask = profileRef.putFile(photoFileUri);
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+               //
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                userReference.child(userID).child("defaulPicture").setValue(false);
+                users.get(userID).setDefaulPicture(false);
+                Log.d("StoreImage", "Success!");
+            }
+        });
+    }
+
+    public StorageReference getUserPhotoReference(String userIdjpg) {
+        return userProfileReference.child(userIdjpg);
+    }
+
 }
