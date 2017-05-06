@@ -79,6 +79,7 @@ public class LogInFragment extends Fragment {
                 } else {
                     try {
                         DatabaseService.getDBService(getActivity().getApplicationContext()).signIn(email, password);
+
                     } catch (Exception e) {
                         Toast.makeText(getActivity().getApplicationContext(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
                     }

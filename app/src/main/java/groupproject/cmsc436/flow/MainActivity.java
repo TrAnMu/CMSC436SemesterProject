@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import groupproject.cmsc436.flow.Service.DatabaseService;
 
@@ -21,14 +20,14 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DatabaseService DBService;
-    private Button addButton;
+    private FloatingActionButton addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addButton = (Button) findViewById(R.id.addevent_button);
+        addButton = (FloatingActionButton) findViewById(R.id.addevent_button);
 
         Intent createIntent = new Intent(this, CreateEventActivity.class);
 
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void addEvent(View view){
-        Event newE = new Event("3 events", -12.5, 99.15, "Me Me Me");
-        DBService.addEvent(newE);
+      // Event newE = new Event("3 events", -12.5, 99.15, "Me Me Me");
+      //  DBService.addEvent(newE);
     }
 }

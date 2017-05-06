@@ -1,6 +1,7 @@
 package groupproject.cmsc436.flow.Service;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -55,11 +56,15 @@ public class DatabaseService {
                         Double longtitude = Double.parseDouble(eventValues.get("longtitude").toString());
                         Double lat = Double.parseDouble(eventValues.get("latitude").toString());
                         String host = eventValues.get("hostName").toString();
+                        String endTime = "end";
+                        Bitmap bitmap = null;
 
 
 
-                        Event event = new Event(eventName, longtitude, lat, host);
-                        allEvents.put(eventName, event);
+
+
+                      Event event = new Event(eventName, longtitude, lat, host,endTime,bitmap);
+                       allEvents.put(eventName, event);
                     }
                     Log.d("events", allEvents.toString());
                 }
@@ -122,5 +127,13 @@ public class DatabaseService {
     public Event getEvent(String eventName) {
         return allEvents.get(eventName);
     }
+
+    public HashMap getAllEvents(){
+        return (HashMap) allEvents;
+    }
+
+
+
+
 
 }

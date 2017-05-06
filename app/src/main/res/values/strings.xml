@@ -52,4 +52,8 @@
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
     <string name="create">Create</string>
+    <string name="_6_00pm">6:00pm</string>
+    <string name="_7950_baltimore_avenue_college_park_md_20742">7950 Baltimore Avenue College Park, MD 20742</string>
+    <string name="me">Me</string>
+    <string name="upload_image">Upload Image</string>
 </resources>

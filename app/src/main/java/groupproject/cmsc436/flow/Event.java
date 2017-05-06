@@ -1,5 +1,9 @@
 package groupproject.cmsc436.flow;
 
+import android.graphics.Bitmap;
+
+import java.util.Date;
+
 /**
  * Created by Junze on 4/23/2017.
  */
@@ -7,29 +11,46 @@ package groupproject.cmsc436.flow;
 public class Event {
 
 
-    private String name = "";
+    private String eventName = "";
     private double longtitude = 0;
     private double latitude = 0;
-    private String hostname = "";
-    private String endTime;
+    private String hostName = "";
+    private String endTime = "";
+    private Date creationTime;
+    private Bitmap img;
+    private int likes;
 
 
+    public Event(){
+        eventName =  "";
+        longtitude = 0;
+        latitude = 0;
+        hostName = "";
+        endTime = "6:00pm";
+        img = null;
 
-    public Event(String eventname, double longti, double lat, String host) {
-        name = eventname;
+
+    }
+
+    public Event(String eventname, double longti, double lat, String host,
+                 String endTimeIn,Bitmap imgIn) {
+        eventName = eventname;
         longtitude = longti;
         latitude = lat;
-        hostname = host;
+        hostName = host;
+        img = imgIn;
+        endTime = endTimeIn;
+
 
 
     }
 
     public void setEventName (String evtname) {
-        name = evtname;
+        eventName = evtname;
     }
 
     public String getEventName() {
-        return name;
+        return eventName;
     }
 
     public double getLongtitude() {
@@ -41,11 +62,15 @@ public class Event {
     }
 
     public String getHostName() {
-        return hostname;
+        return hostName;
     }
 
     public String getEndTime() {
         return endTime;
+    }
+
+    public void setCreationTime(){
+        creationTime = new Date();
     }
 
 
