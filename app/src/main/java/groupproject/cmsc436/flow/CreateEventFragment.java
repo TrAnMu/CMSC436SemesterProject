@@ -40,9 +40,10 @@ public class CreateEventFragment extends Fragment {
     private EditText eventHost;
     private EditText eventLocation;
     private EditText eventEnd;
+    private EditText eventDescription;
     private ImageButton cameraButton;
     private ImageView imageView;
-    private Bitmap bitmap;
+    private String imageURI;
     private File file;
     private static final int REQUEST_IMAGE_CAPTURE = 9;
 
@@ -60,6 +61,9 @@ public class CreateEventFragment extends Fragment {
         eventHost = (EditText) view.findViewById(R.id.event_host);
         eventLocation = (EditText) view.findViewById(R.id.event_location);
         eventEnd = (EditText) view.findViewById(R.id.event_end);
+        eventDescription = (EditText) view.findViewById(R.id.description);
+
+
         imageView = (ImageView) view.findViewById(R.id.image_view);
 
         createButton = (Button) view.findViewById(R.id.create_button);
@@ -112,6 +116,7 @@ public class CreateEventFragment extends Fragment {
                 String name = eventName.getText().toString();
                 String host = eventHost.getText().toString();
                 String location = eventLocation.getText().toString();
+                String description  = eventDescription.getText().toString();
                 double lat = 0;
                 double longi = 0;
 
@@ -134,7 +139,7 @@ public class CreateEventFragment extends Fragment {
                 }
 
 
-                Event event = new Event(name, longi, lat, host, endTime, bitmap);
+                Event event = new Event(name, longi, lat, host, endTime,imageURI,description);
                 event.setCreationTime();
                 DatabaseService.getDBService(getActivity().getApplicationContext()).addEvent(event);
 
@@ -164,7 +169,9 @@ public class CreateEventFragment extends Fragment {
             if(file != null) {
                 Bitmap bitmapIn = BitmapFactory.decodeFile(file.getPath());
                 imageView.setImageBitmap(bitmapIn);
-                bitmap = bitmapIn;
+                Uri uri = Uri.fromFile(file);
+                imageURI = uri.toString();
+
 
             }
         }

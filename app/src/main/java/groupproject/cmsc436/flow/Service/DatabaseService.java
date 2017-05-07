@@ -1,7 +1,6 @@
 package groupproject.cmsc436.flow.Service;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -51,20 +50,33 @@ public class DatabaseService {
                 HashMap<String, HashMap<String, Object>> events = map.get(EVENT);
                 for (Map.Entry<String, HashMap<String, Object>> entry: events.entrySet()) {
                     if (!allEvents.containsKey(entry.getKey())) {
-                        HashMap<String, Object> eventValues = entry.getValue();
-                        String eventName = eventValues.get("eventName").toString();
-                        Double longtitude = Double.parseDouble(eventValues.get("longtitude").toString());
-                        Double lat = Double.parseDouble(eventValues.get("latitude").toString());
-                        String host = eventValues.get("hostName").toString();
-                        String endTime = "end";
-                        Bitmap bitmap = null;
 
+                        HashMap eventValues = entry.getValue();
 
+                        String key = entry.getKey();
+                        String eventName=eventValues.get("eventName").toString();
+                        Double longtitude=Double.parseDouble(eventValues.get("longtitude").toString());
 
+                        Double lat=Double.parseDouble(eventValues.get("latitude").toString());
 
+                        String host=eventValues.get("hostName").toString();
 
-                      Event event = new Event(eventName, longtitude, lat, host,endTime,bitmap);
-                       allEvents.put(eventName, event);
+                        String end=eventValues.get("endTime").toString();
+
+                        String id=eventValues.get("eventID").toString();
+                        String creationTime=eventValues.get("creationTime").toString();
+                        String imageUri=eventValues.get("imageUri").toString();
+                        String likes=eventValues.get("likes").toString();
+                        String description=eventValues.get("description").toString();
+
+                        Event event=new Event(eventName,longtitude,lat,host,end,imageUri,description);
+
+                        event.setEventID(id);
+                        event.setLikes(likes);
+
+                        event.setCreationTime(creationTime);
+
+                        allEvents.put(key,event);
                     }
                     Log.d("events", allEvents.toString());
                 }
@@ -119,8 +131,11 @@ public class DatabaseService {
     }
 
     public void addEvent(Event event) {
+
         dbRef = FirebaseDatabase.getInstance().getReference();
-        dbRef.child(EVENT).child(event.getEventName()).setValue(event);
+        String key =  dbRef.child(EVENT).push().getKey();
+        event.setEventID(key);
+        dbRef.child(EVENT).child(key).setValue(event);
     }
 
 

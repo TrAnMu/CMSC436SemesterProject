@@ -94,6 +94,19 @@
         android:hint="@string/_6_00pm"
         android:inputType="time" />
 
+    <TextView
+        android:id="@+id/event_descri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Super fun pizza party" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,7 +128,7 @@
         android:layout_width="135dp"
         android:layout_height="101dp"
         android:id = "@+id/image_view"
-        android:background="@color/common_plus_signin_btn_text_light_disabled" />
+         />
 
     <Space
         android:layout_width="match_parent"

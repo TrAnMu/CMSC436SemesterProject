@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        DBService = DatabaseService.getDBService(this.getApplicationContext());
+        DBService = DatabaseService.getDBService(getApplicationContext());
 //        DBService.signUp("admin", "pass");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
