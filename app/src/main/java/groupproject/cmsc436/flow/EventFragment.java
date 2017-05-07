@@ -1,13 +1,24 @@
 package groupproject.cmsc436.flow;
 
+import android.*;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import groupproject.cmsc436.flow.Service.DatabaseService;
 
@@ -15,9 +26,14 @@ import groupproject.cmsc436.flow.Service.DatabaseService;
  * Created by Travis on 5/6/17.
  */
 
+//TODO Good morning! Today's gonna be a great day and do you know why? Make a fake event and run this fragment.
+
 public class EventFragment extends Fragment implements OnMapReadyCallback {
     private static final String BUNDLE_ASSEMBLED = "BUNDLE_ASSEMBLED";
     DatabaseService service;
+    ImageView photoView;
+    TextView eventText, broadcasterText, detailsText;
+    SupportMapFragment mapFragment;
     Event event;
 
     @Override
@@ -36,9 +52,39 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_event, container, false);
 
-        //Do some stuff.
+
+        mapFragment = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+
+        photoView = (ImageView)view.findViewById(R.id.event_photo);
+        eventText = (TextView)view.findViewById(R.id.event_title);
+        broadcasterText = (TextView)view.findViewById(R.id.event_broadcaster);
+        detailsText = (TextView)view.findViewById(R.id.event_details);
+
+        eventText.setText(event.getEventName());
+        broadcasterText.setText(event.getHostName());
+        //TODO set details and photo once we have it...
 
         return view;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        LatLng latLng = new LatLng(-34,134); //TODO Replace with real event coords
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title(event.getEventName());
+        googleMap.addMarker(markerOptions);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+        }
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
+
     }
 
     public static EventFragment newInstance(String eventId) {
