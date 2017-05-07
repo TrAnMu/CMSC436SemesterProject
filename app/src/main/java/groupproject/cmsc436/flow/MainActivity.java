@@ -93,6 +93,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(mapIntent);
             return true;
         } else if (id == R.id.nav_explore) {
+            //TODO GET RID OF BEFORE MERGING: TESTING EVENT ACTIVITY
+            Event event = new Event("Alpha", -77.0, 39.0, "Trav");
+            DBService.addEvent(event);
+            Intent intent = EventActivity.newIntent(this, event.getEventName());
+            startActivity(intent);
+            return true;
 
         } else if (id == R.id.nav_account) {
             Intent accountIntent = new Intent(this, ProfileActivity.class);

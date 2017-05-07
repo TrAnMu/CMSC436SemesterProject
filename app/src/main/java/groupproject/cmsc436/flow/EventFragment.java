@@ -1,6 +1,5 @@
 package groupproject.cmsc436.flow;
 
-import android.*;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -53,7 +52,7 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
 
 
-        mapFragment = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
@@ -72,13 +71,13 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        LatLng latLng = new LatLng(-34,134); //TODO Replace with real event coords
+        LatLng latLng = new LatLng(event.getLatitude(), event.getLongtitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title(event.getEventName());
         googleMap.addMarker(markerOptions);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
         }
