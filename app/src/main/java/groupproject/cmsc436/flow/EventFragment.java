@@ -25,7 +25,6 @@ import groupproject.cmsc436.flow.Service.DatabaseService;
  * Created by Travis on 5/6/17.
  */
 
-//TODO Good morning! Today's gonna be a great day and do you know why? Make a fake event and run this fragment.
 
 public class EventFragment extends Fragment implements OnMapReadyCallback {
     private static final String BUNDLE_ASSEMBLED = "BUNDLE_ASSEMBLED";
