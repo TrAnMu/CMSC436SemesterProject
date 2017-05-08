@@ -14,7 +14,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import groupproject.cmsc436.flow.Event;
@@ -117,5 +119,11 @@ public class DatabaseService {
 
     public Event getEvent(String eventName) {
         return allEvents.get(eventName);
+    }
+
+    public List<Event> getAllEvents() {
+        List<Event> list = new ArrayList<Event>(allEvents.values());
+
+        return list;
     }
 }
