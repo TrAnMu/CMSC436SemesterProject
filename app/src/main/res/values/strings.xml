@@ -56,5 +56,6 @@
         <item>Sort 2</item>
         <item>Sort 3</item>
     </string-array>
+    <string name="event_list"></string>
 
 </resources>
