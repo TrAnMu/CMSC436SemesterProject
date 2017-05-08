@@ -1,156 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/create_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/create_a_new_event"
-        android:textAlignment="textStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.05" />
-
-    <TextView
-        android:id="@+id/name_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/name" />
-
-    <EditText
-        android:id="@+id/event_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Pizza Party"
-        android:inputType="textPersonName"
-        android:textSize="18sp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.03" />
-
-    <TextView
-        android:id="@+id/host_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/host" />
-
-    <EditText
-        android:id="@+id/event_host"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/me"
-        android:inputType="textPersonName"
-        android:textSize="18sp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.04" />
-
-    <TextView
-        android:id="@+id/location_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/location" />
-
-    <EditText
-        android:id="@+id/event_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/_7950_baltimore_avenue_college_park_md_20742"
-        android:inputType="textPostalAddress" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/end_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/end_time" />
-
-    <EditText
-        android:id="@+id/event_end"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/_6_00pm"
-        android:inputType="time" />
-
-    <TextView
-        android:id="@+id/event_descri"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Description" />
-
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Super fun pizza party" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.11" />
-
-    <TextView
-        android:id="@+id/image_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/upload_image" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="136dp"
-        android:layout_height="54dp"
-        app:srcCompat="@drawable/ic_menu_camera" />
-
-    <ImageView
-        android:layout_width="135dp"
-        android:layout_height="101dp"
-        android:id = "@+id/image_view"
-         />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="17dp" />
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="69dp">
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/create_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_a_new_event"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05" />
+
+        <TextView
+            android:id="@+id/name_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name" />
+
+        <EditText
+            android:id="@+id/event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Pizza Party"
+            android:inputType="textPersonName"
+            android:textSize="18sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.03" />
+
+        <TextView
+            android:id="@+id/host_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/host" />
+
+        <EditText
+            android:id="@+id/event_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/me"
+            android:inputType="textPersonName"
+            android:textSize="18sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04" />
+
+        <TextView
+            android:id="@+id/location_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location" />
+
+        <EditText
+            android:id="@+id/event_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/_7950_baltimore_avenue_college_park_md_20742"
+            android:inputType="textPostalAddress" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/create_button"
-            android:layout_width="211dp"
+            android:id="@+id/event_end_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_row="0"
-            android:text="@string/create"
-            android:textAlignment="center" />
+            android:text="Set Event  End Time" />
 
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="171dp"
+        <TextView
+            android:id="@+id/event_descri"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cancel" />
+            android:text="Description" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Super fun pizza party" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.11" />
+
+        <TextView
+            android:id="@+id/image_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_image" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            app:srcCompat="@drawable/ic_menu_camera"
+            android:layout_width="136dp"
+            android:layout_height="54dp" />
+
+        <ImageView
+            android:layout_width="135dp"
+            android:layout_height="101dp"
+            android:id = "@+id/image_view"
+             />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="17dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="69dp">
+
+            <Button
+                android:id="@+id/create_button"
+                android:layout_width="211dp"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_row="0"
+                android:text="@string/create"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

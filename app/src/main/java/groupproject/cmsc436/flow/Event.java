@@ -1,7 +1,5 @@
 package groupproject.cmsc436.flow;
 
-import android.net.Uri;
-
 import java.util.Date;
 
 /**
@@ -97,10 +95,9 @@ public class Event {
     }
 
 
-    public Uri getImageUri(){
-        Uri uri;
-        uri = Uri.parse(imageURI);
-        return uri;
+    public String getImageUri(){
+      return imageURI;
+
     }
 
 
