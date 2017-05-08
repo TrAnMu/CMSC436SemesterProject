@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -34,6 +35,8 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-storage:1.0.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.google.android.gms:play-services-maps:10.2.1'
+    compile 'com.google.android.gms:play-services-location:10.2.1'
     testCompile 'junit:junit:4.12'
+    compile "com.android.support:recyclerview-v7:24.2.1"
 }
 apply plugin: 'com.google.gms.google-services'

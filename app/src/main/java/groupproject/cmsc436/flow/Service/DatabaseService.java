@@ -19,7 +19,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import groupproject.cmsc436.flow.Event;
@@ -169,7 +171,6 @@ public class DatabaseService {
     public Event getEvent(String eventID) {
         return allEvents.get(eventID);
     }
-
     public UserInfo getCurrentUser() {
         return users.get(FirebaseAuth.getInstance().getCurrentUser().getUid());
     }
@@ -197,5 +198,8 @@ public class DatabaseService {
     public StorageReference getUserPhotoReference(String userIdjpg) {
         return userProfileReference.child(userIdjpg);
     }
-
+    public List<Event> getAllEvents() {
+        List<Event> list = new ArrayList<Event>(allEvents.values());
+        return list;
+    }
 }
