@@ -24,15 +24,21 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
+
             <ImageButton
+                android:id="@+id/profile_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/profile_gallery"
-                android:src="@android:drawable/ic_menu_gallery"/>
+                android:background="@color/colorPrimaryBlue"
+                android:src="@android:drawable/ic_menu_gallery"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_camera"
+                android:background="@color/colorPrimaryBlue"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:src="@android:drawable/ic_menu_camera"/>
         </LinearLayout>
         <RelativeLayout
@@ -65,5 +71,7 @@
         android:layout_marginRight="@dimen/profile_margin_wider"
         android:id="@+id/profile_log_out_button"
         android:text="@string/log_out"
-        android:textSize="26sp"/>
+        android:textSize="26sp"
+        android:background="@color/colorPrimaryBlue"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"/>
 </LinearLayout>

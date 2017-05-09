@@ -8,9 +8,23 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@android:style/Theme.NoTitleBar"
     tools:context="groupproject.cmsc436.flow.LogInActivity">
 
     <!-- Login progress -->
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Phero"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/colorPrimaryBlue"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -22,13 +36,14 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="387dp">
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -40,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"/>
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -57,29 +72,33 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1"/>
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryBlue"
                 android:text="@string/action_sign_in_short"
-                android:textStyle="bold" />
-            <TextView
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ask_register_text"
-                android:layout_marginTop="@dimen/register_margin"/>
+                android:layout_height="20dp"
+                android:layout_weight="0.71" />
 
             <Button
+                android:id="@+id/action_register_button"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/register_registration_button"
-                android:id="@+id/action_register_button"/>
+                android:layout_height="33dp"
+                android:background="@color/colorPrimaryBlue"
+                android:text="@string/sign_up_for_phero"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
         </LinearLayout>
     </ScrollView>
