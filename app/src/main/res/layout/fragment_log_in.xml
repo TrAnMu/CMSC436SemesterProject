@@ -13,6 +13,18 @@
 
     <!-- Login progress -->
 
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Phero"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/colorPrimaryBlue"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -30,7 +42,8 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -67,22 +80,25 @@
                 android:id="@+id/email_sign_in_button"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in_short" />
+                android:background="@color/colorPrimaryBlue"
+                android:text="@string/action_sign_in_short"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
-            <TextView
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_margin"
-                android:text="@string/ask_register_text" />
+                android:layout_height="20dp"
+                android:layout_weight="0.71" />
 
             <Button
                 android:id="@+id/action_register_button"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/register_registration_button" />
+                android:layout_height="33dp"
+                android:background="@color/colorPrimaryBlue"
+                android:text="@string/sign_up_for_phero"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
         </LinearLayout>
     </ScrollView>

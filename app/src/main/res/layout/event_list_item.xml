@@ -8,7 +8,9 @@
         android:id="@+id/eventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event Name" />
+        android:text="Event Name"
+        android:textSize="16sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/eventInfo"
         android:layout_width="wrap_content"

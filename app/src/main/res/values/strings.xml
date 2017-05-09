@@ -71,5 +71,6 @@
         <item>Sort 3</item>
     </string-array>
     <string name="event_list"></string>
+    <string name="sign_up_for_phero">Sign Up For Phero</string>
 
 </resources>
