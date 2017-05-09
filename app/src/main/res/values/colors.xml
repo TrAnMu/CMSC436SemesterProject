@@ -5,5 +5,8 @@
     <color name="colorAccent">#2faf38</color>
     <color name="colorMetallicGray">#778899</color>
     <color name="colorBlue">#4c4cff</color>
-    <color name="colorDarkBlue">#000099</color>
+    <color name="colorPrimaryBlue">#1E88E5</color>
+    <color name="colorDarkBlue">#1565c0</color>
+    <color name="colorAccentBlue">#64b5f5</color>
+
 </resources>

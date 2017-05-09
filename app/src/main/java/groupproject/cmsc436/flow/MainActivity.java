@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DatabaseService DBService;
+    private FloatingActionButton addButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,6 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_menu_send);
@@ -49,6 +50,31 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        addButton = (FloatingActionButton) findViewById(R.id.addevent_button);
+
+        Intent createIntent = new Intent(this, CreateEventActivity.class);
+
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(getApplication().getApplicationContext(),
+                        CreateEventActivity.class);
+                         startActivity(createIntent);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -121,8 +147,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void addEvent(View view){
-        Event newE = new Event("another Event", -12.5, 99.15, "Wala");
-        DBService.addEvent(newE);
-    }
 }
