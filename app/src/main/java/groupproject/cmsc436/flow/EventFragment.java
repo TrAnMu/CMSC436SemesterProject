@@ -64,7 +64,9 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
 
         eventText.setText(event.getEventName());
         broadcasterText.setText(event.getHostName());
-        //TODO set details and photo once we have it...
+        detailsText.setText("Created on: " +  event.getCreationTime() + " - " + event.getDescription());
+
+        //TODO set photo once we have it...
 
         return view;
     }
