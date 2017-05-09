@@ -10,4 +10,8 @@ public class CreateEventActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         return CreateEventFragment.newInstance();
     }
+
+
+
+
 }
