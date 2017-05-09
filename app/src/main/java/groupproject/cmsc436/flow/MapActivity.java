@@ -25,6 +25,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
+import groupproject.cmsc436.flow.Service.DatabaseService;
+
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -37,6 +41,7 @@ public class MapActivity extends AppCompatActivity
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    List<Event> eventList = DatabaseService.getDBService().getAllEvents();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,6 +88,19 @@ public class MapActivity extends AppCompatActivity
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
+
+
+        List<Event> events = DatabaseService.getDBService().getAllEvents();
+        LatLng curr;
+        for(Event e: events){
+            curr = new LatLng(e.getLatitude(),e.getLongtitude());
+
+            mGoogleMap.addMarker(new MarkerOptions().position(curr).title(e.getEventName()));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(curr));
+        }
+
+
+
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -97,8 +115,8 @@ public class MapActivity extends AppCompatActivity
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setInterval(1000*60);
+        mLocationRequest.setFastestInterval(1000*100);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -128,6 +146,20 @@ public class MapActivity extends AppCompatActivity
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
+
+        //create event markers
+        if(eventList!= null || eventList.isEmpty() == false) {
+            for (Event e : eventList) {
+                LatLng current = new LatLng(e.getLatitude(), e.getLongtitude());
+                MarkerOptions marker = new MarkerOptions();
+                marker.position(current);
+                marker.title(e.getEventName());
+                mGoogleMap.addMarker(marker);
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current,11));
+
+
+            }
+        }
 
         //move map camera
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
