@@ -31,15 +31,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         dataModels= new ArrayList<>();
 
-        dataModels.add(new DataModel("Setting 1"));
-        dataModels.add(new DataModel("Setting 2"));
-        dataModels.add(new DataModel("Setting 3"));
-        dataModels.add(new DataModel("Setting 4"));
-        dataModels.add(new DataModel("Setting 5"));
-        dataModels.add(new DataModel("Setting 6"));
-        dataModels.add(new DataModel("Setting 7"));
-        dataModels.add(new DataModel("Setting 8"));
-        dataModels.add(new DataModel("Setting 9"));
+        dataModels.add(new DataModel("General Settings"));
+        dataModels.add(new DataModel("Map Settings"));
+        dataModels.add(new DataModel("Theme Settings "));
 
 
         adapter= new SettingsAdapter(dataModels,getApplicationContext());

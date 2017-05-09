@@ -25,6 +25,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
+import groupproject.cmsc436.flow.Service.DatabaseService;
+
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -83,6 +87,19 @@ public class MapActivity extends AppCompatActivity
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
+
+
+        List<Event> events = DatabaseService.getDBService().getAllEvents();
+        LatLng curr;
+        for(Event e: events){
+            curr = new LatLng(e.getLatitude(),e.getLongtitude());
+
+            mGoogleMap.addMarker(new MarkerOptions().position(curr).title(e.getEventName()));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(curr));
+        }
+
+
+
     }
 
     protected synchronized void buildGoogleApiClient() {
