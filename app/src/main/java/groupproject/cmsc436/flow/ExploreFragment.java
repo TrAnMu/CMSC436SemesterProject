@@ -123,7 +123,7 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
     }
 
     private void updateUI() {
-        List<Event> es = DatabaseService.getDBService(getActivity().getApplicationContext()).getAllEvents();
+        List<Event> es = DatabaseService.getDBService().getAllEvents();
 
         if(ea == null) {
             ea = new EventAdapter(es);

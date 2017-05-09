@@ -164,8 +164,8 @@ public class CreateEventFragment extends Fragment {
 
                 Event event = new Event(name, longi, lat, host, endTime,imageURI,description);
                 event.setCreationTime();
-                DatabaseService.getDBService(getActivity().getApplicationContext()).addEvent(event);
-                DatabaseService.getDBService(getActivity().getApplicationContext()).addEventPhoto(event);
+                DatabaseService.getDBService().addEvent(event);
+                DatabaseService.getDBService().addEventPhoto(event);
                 getActivity().finish();
             }
         });

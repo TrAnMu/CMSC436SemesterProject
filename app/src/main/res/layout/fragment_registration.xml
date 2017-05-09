@@ -21,6 +21,26 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/firstname"
+        style="@style/RegisterViewTitle"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_firstname"
+        style="@style/RegisterViewInput"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lastname"
+        style="@style/RegisterViewTitle"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_lastname"
+        style="@style/RegisterViewInput"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/register_password"
         style="@style/RegisterViewTitle"/>
     <EditText

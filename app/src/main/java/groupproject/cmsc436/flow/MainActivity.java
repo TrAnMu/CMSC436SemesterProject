@@ -26,27 +26,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DBService = DatabaseService.getDBService();
 
-        addButton = (FloatingActionButton) findViewById(R.id.addevent_button);
-
-        Intent createIntent = new Intent(this, CreateEventActivity.class);
-
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent createIntent = new Intent(getApplication().getApplicationContext(),
-                                                CreateEventActivity.class);
-                startActivity(createIntent);
-            }
-        });
-
-
-
-        DBService = DatabaseService.getDBService(getApplicationContext());
-//        DBService.signUp("admin", "pass");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +49,31 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        addButton = (FloatingActionButton) findViewById(R.id.addevent_button);
+
+        Intent createIntent = new Intent(this, CreateEventActivity.class);
+
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createIntent = new Intent(getApplication().getApplicationContext(),
+                        CreateEventActivity.class);
+                         startActivity(createIntent);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -137,8 +146,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void addEvent(View view){
-      // Event newE = new Event("3 events", -12.5, 99.15, "Me Me Me");
-      //  DBService.addEvent(newE);
-    }
 }

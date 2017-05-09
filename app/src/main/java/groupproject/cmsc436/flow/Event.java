@@ -53,6 +53,9 @@ public class Event {
         eventName = evtname;
     }
 
+
+
+
     public String getEventName() {
         return eventName;
     }
@@ -104,6 +107,7 @@ public class Event {
     public void setCreationTime(String time){
         creationTime = time;
     }
+
     public String getCreationTime(){
         return creationTime;
     }
@@ -111,4 +115,10 @@ public class Event {
     public void setLikes(String likes) {
         this.likes =Integer.parseInt(likes);
     }
+
+    public void addLikes() {
+        likes++;
+    }
+
+
 }
