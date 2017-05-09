@@ -19,6 +19,8 @@ import groupproject.cmsc436.flow.Service.DatabaseService;
 public class RegistrationFragment extends Fragment {
 
     private EditText usernameEditText;
+    private EditText lastnameEditText;
+    private EditText firstnameEditText;
     private EditText passEditText;
     private EditText repeatPassEditText;
     private Button cancelButton;
@@ -29,6 +31,8 @@ public class RegistrationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registration, container, false);
         usernameEditText = (EditText)view.findViewById(R.id.register_username);
+        firstnameEditText = (EditText)view.findViewById(R.id.register_firstname);
+        lastnameEditText = (EditText)view.findViewById(R.id.register_lastname);
         passEditText = (EditText)view.findViewById(R.id.register_password);
         repeatPassEditText = (EditText)view.findViewById(R.id.register_repeat_password);
 
@@ -43,15 +47,17 @@ public class RegistrationFragment extends Fragment {
         registerButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
+                String first = firstnameEditText.getText().toString();
+                String last = lastnameEditText.getText().toString();
                 String password = passEditText.getText().toString();
                 String password2 = repeatPassEditText.getText().toString();
-                if (username.isEmpty() || password.isEmpty() || password2.isEmpty()) {
+                if (username.isEmpty() ||  first.isEmpty() || last.isEmpty() || password.isEmpty() || password2.isEmpty()) {
                     Toast.makeText(getActivity(), R.string.none_fields_blank, Toast.LENGTH_SHORT).show();
                 } else if (!password.equals(password2)) {
                     Toast.makeText(getActivity(), "The two passwords you entered are different", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
-                        DatabaseService.getDBService(getActivity().getApplicationContext()).signUp(username, password);
+                        DatabaseService.getDBService().signUp(username, password, first, last);
                         getActivity().finish();
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
