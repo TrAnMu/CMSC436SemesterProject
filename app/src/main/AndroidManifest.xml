@@ -32,6 +32,7 @@
 
 
         <activity android:name=".RegistrationActivity" />
+        <activity android:name=".EventActivity"/>
         <activity
             android:name=".LogInActivity"
             android:label="@string/title_activity_log_in">

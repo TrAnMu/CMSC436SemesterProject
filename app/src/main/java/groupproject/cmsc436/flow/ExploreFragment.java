@@ -1,5 +1,6 @@
 package groupproject.cmsc436.flow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -83,7 +84,8 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
 
         @Override
         public void onClick(View view) {
-            //edit event
+            Intent intent = EventActivity.newIntent(getActivity(), event.getEventID());
+            startActivity(intent);
         }
     }
 
