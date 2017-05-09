@@ -27,11 +27,13 @@ import groupproject.cmsc436.flow.Service.DatabaseService;
 
 
 public class EventFragment extends Fragment implements OnMapReadyCallback {
+    public static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private static final String BUNDLE_ASSEMBLED = "BUNDLE_ASSEMBLED";
     DatabaseService service;
     ImageView photoView;
     TextView eventText, broadcasterText, detailsText;
     SupportMapFragment mapFragment;
+    GoogleMap googleMap;
     Event event;
 
     @Override
@@ -82,7 +84,7 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
         }
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
-
+        this.googleMap = googleMap;
     }
 
     public static EventFragment newInstance(String eventId) {
