@@ -45,6 +45,20 @@
     <string name="ask_register_text">No account? Don\'t worry, you can register here!</string>
     <string name="title_activity_explore">Map</string>
 
+    <string name="create_a_new_event">Create a New Event</string>
+    <string name="name">Name</string>
+    <string name="host">Host</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="create">Create</string>
+    <string name="_6_00pm">6:00pm</string>
+    <string name="_7950_baltimore_avenue_college_park_md_20742">7950 Baltimore Avenue College Park, MD 20742</string>
+    <string name="me">Me</string>
+    <string name="upload_image">Upload Image</string>
+
+
     <string-array name="filter_array">
         <item>Filter 1</item>
         <item>Filter 2</item>
@@ -57,5 +71,6 @@
         <item>Sort 3</item>
     </string-array>
     <string name="event_list"></string>
+    <string name="sign_up_for_phero">Sign Up For Phero</string>
 
 </resources>

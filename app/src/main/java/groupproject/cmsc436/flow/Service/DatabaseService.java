@@ -64,14 +64,32 @@ public class DatabaseService {
                 if (events != null) {
                     for (Map.Entry<String, HashMap<String, Object>> entry : events.entrySet()) {
                         if (!allEvents.containsKey(entry.getKey())) {
-                            HashMap<String, Object> eventValues = entry.getValue();
+                            HashMap eventValues = entry.getValue();
+
                             String key = entry.getKey();
-                            String eventName = eventValues.get("eventName").toString();
-                            Double longtitude = Double.parseDouble(eventValues.get("longtitude").toString());
-                            Double lat = Double.parseDouble(eventValues.get("latitude").toString());
-                            String host = eventValues.get("hostName").toString();
-                            Event event = new Event(eventName, longtitude, lat, host);
-                            allEvents.put(key, event);
+                            String eventName=eventValues.get("eventName").toString();
+                            Double longtitude=Double.parseDouble(eventValues.get("longtitude").toString());
+
+                            Double lat=Double.parseDouble(eventValues.get("latitude").toString());
+
+                            String host=eventValues.get("hostName").toString();
+
+                            String end=eventValues.get("endTime").toString();
+
+                            String id=eventValues.get("eventID").toString();
+                            String creationTime=eventValues.get("creationTime").toString();
+                            String imageUri=eventValues.get("imageUri").toString();
+                            String likes=eventValues.get("likes").toString();
+                            String description=eventValues.get("description").toString();
+
+                            Event event=new Event(eventName,longtitude,lat,host,end,imageUri,description);
+
+                            event.setEventID(id);
+                            event.setLikes(likes);
+
+                            event.setCreationTime(creationTime);
+
+                            allEvents.put(key,event);
                         }
                     }
                 }
@@ -182,7 +200,7 @@ public class DatabaseService {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-               //
+                //
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -202,4 +220,36 @@ public class DatabaseService {
         List<Event> list = new ArrayList<Event>(allEvents.values());
         return list;
     }
+
+
+
+
+    public void addEventPhoto(Event event) {
+
+
+        StorageReference eventRef = eventPhotoReference.child(event.getEventID()+".jpg");
+
+        Uri uri = Uri.parse(event.getImageUri());
+
+        UploadTask uploadTask = eventRef.putFile(uri);
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                //
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Log.d("StoreImage", "Success!");
+            }
+        });
+    }
+
+
+
+
+
+
 }

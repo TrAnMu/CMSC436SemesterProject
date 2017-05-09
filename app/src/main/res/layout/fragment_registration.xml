@@ -68,16 +68,23 @@
         android:layout_marginLeft="@dimen/register_margin"
         android:layout_marginRight="@dimen/register_margin">
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="137dp"
+            android:layout_height="40dp"
             android:id="@+id/register_registration_button"
+            android:background="@color/colorPrimaryBlue"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:text="@string/register_registration_button"/>
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content" />
+
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="40dp"
             android:id="@+id/cancel_button"
+            android:background="@color/colorPrimaryBlue"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:text="@string/cancel"/>
     </LinearLayout>
 
