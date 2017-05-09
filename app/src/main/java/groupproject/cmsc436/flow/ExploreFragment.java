@@ -84,7 +84,7 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent intent = EventActivity.newIntent(getActivity(), event.getEventName());
+            Intent intent = EventActivity.newIntent(getActivity(), event.getEventID());
             startActivity(intent);
         }
     }

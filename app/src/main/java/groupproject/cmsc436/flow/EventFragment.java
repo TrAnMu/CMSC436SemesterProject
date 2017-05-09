@@ -40,7 +40,7 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        service = DatabaseService.getDBService(getActivity());
+        service = DatabaseService.getDBService();
         Bundle bundle = getArguments();
         String eventId = bundle.getString(BUNDLE_ASSEMBLED);
         event = service.getEvent(eventId);
