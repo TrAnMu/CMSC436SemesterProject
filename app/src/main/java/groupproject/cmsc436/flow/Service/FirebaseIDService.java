@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 /**
  * Created by Junze on 5/9/2017.
@@ -11,6 +12,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 public class FirebaseIDService extends FirebaseInstanceIdService {
     private static final String TAG = "FirebaseIDService";
+    private static final String TOPIC = "EVENT";
 
     @Override
     public void onTokenRefresh() {
@@ -19,6 +21,8 @@ public class FirebaseIDService extends FirebaseInstanceIdService {
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
         // TODO: Implement this method to send any registration to your app's servers.
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC);
+        Log.d("Subscribe", TOPIC);
         sendRegistrationToServer(refreshedToken);
     }
 
