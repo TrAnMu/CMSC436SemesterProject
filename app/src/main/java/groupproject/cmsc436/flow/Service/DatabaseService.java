@@ -216,6 +216,11 @@ public class DatabaseService {
     public StorageReference getUserPhotoReference(String userIdjpg) {
         return userProfileReference.child(userIdjpg);
     }
+
+    public StorageReference getEventPhotoReference(String eventIdjpg) {
+        return eventPhotoReference.child(eventIdjpg);
+    }
+
     public List<Event> getAllEvents() {
         List<Event> list = new ArrayList<Event>(allEvents.values());
         return list;
