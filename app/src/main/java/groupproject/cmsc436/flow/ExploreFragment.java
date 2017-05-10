@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,6 +35,17 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
 
         final View view = inflater.inflate(R.layout.fragment_explore, container, false);
+
+
+        Spinner fspinner = (Spinner) view.findViewById(R.id.filter_spinner);
+        ArrayAdapter<CharSequence> fAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.filter_array, android.R.layout.simple_spinner_item);
+
+        fAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        fspinner.setAdapter(fAdapter);
+
+        //fspinner.onClick();
 
         rv = (RecyclerView) view.findViewById(R.id.event_recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));

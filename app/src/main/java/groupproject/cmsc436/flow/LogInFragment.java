@@ -1,6 +1,8 @@
 package groupproject.cmsc436.flow;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,20 +29,50 @@ public class LogInFragment extends Fragment {
     private EditText passwordTextView;
     private Button signInButton;
     private Button registerButton;
-
+    private String myPref = "mypref";
+    private String example = "";
+    private SharedPreferences.Editor editor;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(myPref, Context.MODE_PRIVATE);
+
+
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+
+                    if(sharedPreferences.contains("startPage")){
+
+                        example = sharedPreferences.getString("startPage","explore");
+
+                        if(sharedPreferences.getString("startPage","explore").equals("explore")){
+
+
+                            Intent intent = new Intent(getActivity().getApplicationContext(), ExploreActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }else{
+
+                            Intent intent = new Intent(getActivity().getApplicationContext(),MapActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+                    }else{
+
+                        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+
+                    }
+
+
                 }
             }
         };
