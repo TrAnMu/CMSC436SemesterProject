@@ -88,6 +88,19 @@ public class MapActivity extends AppCompatActivity
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
+
+
+        List<Event> events = DatabaseService.getDBService().getAllEvents();
+        LatLng curr;
+        for(Event e: events){
+            curr = new LatLng(e.getLatitude(),e.getLongtitude());
+
+            mGoogleMap.addMarker(new MarkerOptions().position(curr).title(e.getEventName()));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(curr));
+        }
+
+
+
     }
 
     protected synchronized void buildGoogleApiClient() {
