@@ -2,6 +2,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -115,6 +116,25 @@
             android:background="@color/colorPrimaryBlue"
             android:text="Set Event  End Time"
             android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="14dp" />
+
+        <TextView
+            android:id="@+id/endtime_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event End Time"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/endtime_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12:00pm"
+            android:textSize="16sp" />
 
         <Space
             android:layout_width="match_parent"

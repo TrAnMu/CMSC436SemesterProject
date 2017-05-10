@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -52,7 +53,7 @@ import static groupproject.cmsc436.flow.MapActivity.MY_PERMISSIONS_REQUEST_LOCAT
 
 
 public class CreateEventFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+        GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener{
 
     private static final long LOCATION_REFRESH_TIME = 0;
     private static final float LOCATION_REFRESH_DISTANCE = 0;
@@ -62,15 +63,18 @@ public class CreateEventFragment extends Fragment implements GoogleApiClient.Con
     private EditText eventName;
     private EditText eventHost;
     private TextView eventLocation;
-    private EditText eventEnd;
+    private static TextView endTimeDisplay;
     private EditText eventDescription;
     private ImageButton cameraButton;
     private ImageView imageView;
     private String imageURI;
+    private static String endTime = "";
     private File file;
     private Location mLastLocation;
+    private TimePicker timePicker;
     double lat = 0;
     double longi = 0;
+
 
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
@@ -118,6 +122,8 @@ public class CreateEventFragment extends Fragment implements GoogleApiClient.Con
         createButton = (Button) view.findViewById(R.id.create_button);
         cancelButton = (Button) view.findViewById(R.id.cancel_button);
         cameraButton = (ImageButton) view.findViewById(R.id.imageButton);
+        endTimeDisplay = (TextView) view.findViewById(R.id.endtime_display);
+
 
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +160,8 @@ public class CreateEventFragment extends Fragment implements GoogleApiClient.Con
                 DialogFragment newFragment = new TimePickerFragment();
                 newFragment.show(getActivity().getFragmentManager(), "Time Picker");
 
+
+
             }
         });
 
@@ -176,7 +184,6 @@ public class CreateEventFragment extends Fragment implements GoogleApiClient.Con
                 String host = eventHost.getText().toString();
                 String location = eventLocation.getText().toString();
                 String description = eventDescription.getText().toString();
-                String endTime = TimePickerFragment.getTime();
 
                 Geocoder geocoder = new Geocoder(getActivity().getApplicationContext()
                 );
@@ -348,6 +355,8 @@ private void permissionCheck() {
 
     }
 
-
-
+    public static void setEndTime(String time){
+        endTime = time;
+        endTimeDisplay.setText(endTime);
+    }
 }
