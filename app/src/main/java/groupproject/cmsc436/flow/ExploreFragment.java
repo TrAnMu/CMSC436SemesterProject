@@ -9,7 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 
 import java.util.List;
 
@@ -21,12 +26,15 @@ import groupproject.cmsc436.flow.Service.DatabaseService;
 
 public class ExploreFragment extends android.support.v4.app.Fragment {
     String currlist = "";
-    private EventAdapter ea;
-    private RecyclerView rv;
+    private EventAdapter eventAdapter;
+    private RecyclerView recyclerView;
+    DatabaseService service;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        service = DatabaseService.getDBService();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,8 +42,8 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        rv = (RecyclerView) view.findViewById(R.id.event_recycler_view);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView = (RecyclerView) view.findViewById(R.id.event_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         currlist = this.getString(R.string.event_list);
 
@@ -51,22 +59,30 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
     private class EventHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Event event;
 
-        TextView tv1, tv2;
+        TextView eventText, infoText;
+        ImageView photoView;
 
         public EventHolder(View view) {
             super(view);
 
             view.setOnClickListener(this);
 
-            tv1 = (TextView) view.findViewById(R.id.eventName);
-            tv2 = (TextView) view.findViewById(R.id.eventInfo);
+            eventText = (TextView) view.findViewById(R.id.list_item_event_title);
+            infoText = (TextView) view.findViewById(R.id.list_item_event_info);
+            photoView = (ImageView) view.findViewById(R.id.list_item_event_photo);
         }
 
         public void bindEvent(Event eventIn) {
             event = eventIn;
 
-            tv1.setText(event.getEventName());
-            tv2.setText(event.getHostName());
+            eventText.setText(event.getEventName());
+            infoText.setText(event.getHostName());
+            Glide.with(getActivity().getApplicationContext())
+                    .using(new FirebaseImageLoader())
+                    .load(service.getEventPhotoReference(event.getEventID()+".jpg"))
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(photoView);
         }
 
         @Override
@@ -114,14 +130,14 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
     private void updateUI() {
         List<Event> es = DatabaseService.getDBService().getAllEvents();
 
-        if(ea == null) {
-            ea = new EventAdapter(es);
+        if(eventAdapter == null) {
+            eventAdapter = new EventAdapter(es);
 
-            rv.setAdapter(ea);
+            recyclerView.setAdapter(eventAdapter);
         }
         else {
-            ea.setEvents(es);
-            ea.notifyDataSetChanged();
+            eventAdapter.setEvents(es);
+            eventAdapter.notifyDataSetChanged();
         }
     }
 }
