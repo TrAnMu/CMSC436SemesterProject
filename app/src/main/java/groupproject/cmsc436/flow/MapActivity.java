@@ -120,7 +120,7 @@ public class MapActivity extends AppCompatActivity
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000*60);
-        mLocationRequest.setFastestInterval(1000*100);
+        mLocationRequest.setFastestInterval(1000*60);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
