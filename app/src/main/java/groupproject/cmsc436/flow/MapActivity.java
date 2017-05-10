@@ -1,6 +1,7 @@
 package groupproject.cmsc436.flow;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -63,6 +64,8 @@ public class MapActivity extends AppCompatActivity
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+
+
     }
 
     @Override
@@ -88,20 +91,23 @@ public class MapActivity extends AppCompatActivity
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
-
-
-        List<Event> events = DatabaseService.getDBService().getAllEvents();
-        LatLng curr;
-        for(Event e: events){
-            curr = new LatLng(e.getLatitude(),e.getLongtitude());
-
-            mGoogleMap.addMarker(new MarkerOptions().position(curr).title(e.getEventName()));
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(curr));
-        }
-
-
-
+        mGoogleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
+            @Override
+            public void onInfoWindowLongClick(Marker marker) {
+                String id = null;
+                if(!marker.getTitle().equals("Current Position")) {
+                    for (Event e : eventList) {
+                        if (e.getEventName().equals(marker.getTitle()) && e.getLatitude() == marker.getPosition().latitude && e.getLongtitude() == marker.getPosition().longitude) {
+                            id = e.getEventID();
+                        }
+                    }
+                    Intent intent = EventActivity.newIntent(getApplicationContext(), id);
+                    startActivity(intent);
+                }
+            }
+        });
     }
+
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -116,7 +122,7 @@ public class MapActivity extends AppCompatActivity
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000*60);
-        mLocationRequest.setFastestInterval(1000*100);
+        mLocationRequest.setFastestInterval(1000*60);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
