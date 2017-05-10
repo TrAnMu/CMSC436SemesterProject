@@ -27,6 +27,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -59,7 +61,7 @@ public class CreateEventFragment extends Fragment implements GoogleApiClient.Con
     private Button setTimeButton;
     private EditText eventName;
     private EditText eventHost;
-    private EditText eventLocation;
+    private TextView eventLocation;
     private EditText eventEnd;
     private EditText eventDescription;
     private ImageButton cameraButton;
@@ -105,7 +107,7 @@ public class CreateEventFragment extends Fragment implements GoogleApiClient.Con
 
         eventName = (EditText) view.findViewById(R.id.event_name);
         eventHost = (EditText) view.findViewById(R.id.event_host);
-        eventLocation = (EditText) view.findViewById(R.id.event_location);
+        eventLocation = (TextView) view.findViewById(R.id.event_location);
 
         eventDescription = (EditText) view.findViewById(R.id.description);
 
@@ -199,11 +201,18 @@ public class CreateEventFragment extends Fragment implements GoogleApiClient.Con
                     longi = mLastLocation.getLongitude();
                 }
 
-                Event event = new Event(name, longi, lat, host, endTime, imageURI, description);
-                event.setCreationTime();
-                DatabaseService.getDBService().addEvent(event);
-                DatabaseService.getDBService().addEventPhoto(event);
-                getActivity().finish();
+
+                if (name.equals("") || host.equals("") || imageURI.equals("") ||
+                    description.equals("") || endTime.equals("")) {
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.none_fields_blank, Toast.LENGTH_SHORT).show();
+                } else {
+                    Event event = new Event(name, longi, lat, host, endTime, imageURI, description);
+                    event.setCreationTime();
+                    DatabaseService.getDBService().addEvent(event);
+                    DatabaseService.getDBService().addEventPhoto(event);
+                    getActivity().finish();
+
+                }
             }
         });
 
