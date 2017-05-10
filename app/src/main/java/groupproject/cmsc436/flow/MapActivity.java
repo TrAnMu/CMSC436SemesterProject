@@ -95,13 +95,15 @@ public class MapActivity extends AppCompatActivity
             @Override
             public void onInfoWindowLongClick(Marker marker) {
                 String id = null;
-                for(Event e: eventList) {
-                    if(e.getEventName().equals(marker.getTitle()) && e.getLatitude() == marker.getPosition().latitude && e.getLongtitude() == marker.getPosition().longitude) {
-                        id = e.getEventID();
+                if(!marker.getTitle().equals("Current Position")) {
+                    for (Event e : eventList) {
+                        if (e.getEventName().equals(marker.getTitle()) && e.getLatitude() == marker.getPosition().latitude && e.getLongtitude() == marker.getPosition().longitude) {
+                            id = e.getEventID();
+                        }
                     }
+                    Intent intent = EventActivity.newIntent(getApplicationContext(), id);
+                    startActivity(intent);
                 }
-                Intent intent = EventActivity.newIntent(getApplicationContext(),id);
-                startActivity(intent);
             }
         });
     }
