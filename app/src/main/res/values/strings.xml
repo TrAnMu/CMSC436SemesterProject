@@ -57,6 +57,9 @@
     <string name="_7950_baltimore_avenue_college_park_md_20742">7950 Baltimore Avenue College Park, MD 20742</string>
     <string name="me">Me</string>
     <string name="upload_image">Upload Image</string>
+    <string name="welcome">Welcome To Phero!!</string>
+    <string name="info_text_1">Phero is your one stop destination for local events happening around you</string>
+    <string name="info_text_2">Look for the plus button whenever you want tell others whats going on! </string>
 
 
     <string-array name="filter_array">
