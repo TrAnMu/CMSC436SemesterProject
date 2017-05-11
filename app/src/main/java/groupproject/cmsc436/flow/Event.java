@@ -103,7 +103,6 @@ public class Event {
 
     }
 
-
     public void setCreationTime(String time){
         creationTime = time;
     }
