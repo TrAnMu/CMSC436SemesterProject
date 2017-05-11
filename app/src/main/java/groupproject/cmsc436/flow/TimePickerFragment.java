@@ -37,23 +37,21 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         String aMpM = "AM";
         int  currentHour;
         String currMinute;
-        if(hourOfDay >11)
-        {
+        if(hourOfDay >11) {
             aMpM = "PM";
         }
 
-        if(hourOfDay > 12)
-        {
+        if(hourOfDay > 12) {
             currentHour = hourOfDay - 12;
-        }
-        else
-        {
-            currentHour = hourOfDay;
+        } else if (hourOfDay == 0) {
+            currentHour = 12;
+        } else {
+                currentHour = hourOfDay;
         }
 
-        if(minute < 10){
+        if (minute < 10) {
            currMinute = Integer.toString(minute) + "0";
-        }else{
+        } else {
             currMinute = Integer.toString(minute);
         }
 
@@ -62,9 +60,9 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     }
 
 
-public static String getTime(){
-    return currTime;
-}
+    public static String getTime(){
+        return currTime;
+    }
 
 
 
