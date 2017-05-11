@@ -35,7 +35,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     //onTimeSet() callback method
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
         String aMpM = "AM";
-        int  currentHour;
+        int currentHour;
         String currMinute;
         if(hourOfDay >11) {
             aMpM = "PM";
@@ -46,11 +46,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         } else if (hourOfDay == 0) {
             currentHour = 12;
         } else {
-                currentHour = hourOfDay;
+            currentHour = hourOfDay;
         }
 
         if (minute < 10) {
-           currMinute = Integer.toString(minute) + "0";
+            currMinute = Integer.toString(minute) + "0";
         } else {
             currMinute = Integer.toString(minute);
         }
