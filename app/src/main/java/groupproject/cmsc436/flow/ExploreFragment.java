@@ -2,6 +2,7 @@ package groupproject.cmsc436.flow;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,10 +26,12 @@ import groupproject.cmsc436.flow.Service.DatabaseService;
  */
 
 public class ExploreFragment extends android.support.v4.app.Fragment {
+    static final int REQUEST_CODE_CREATE_EVENT = 2;
     String currlist = "";
     private EventAdapter eventAdapter;
     private RecyclerView recyclerView;
     DatabaseService service;
+    FloatingActionButton fab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,11 +48,30 @@ public class ExploreFragment extends android.support.v4.app.Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.event_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent createIntent = new Intent(getActivity(), CreateEventActivity.class);
+                startActivityForResult(createIntent, REQUEST_CODE_CREATE_EVENT);
+            }
+        });
+
         currlist = this.getString(R.string.event_list);
 
         updateUI();
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_CREATE_EVENT) {
+            updateUI();
+        }
     }
 
     public static Fragment newInstance() {
