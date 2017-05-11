@@ -1,10 +1,10 @@
 package groupproject.cmsc436.flow;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import groupproject.cmsc436.flow.Service.DatabaseService;
 
@@ -32,16 +33,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_menu_send);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,10 +44,6 @@ public class MainActivity extends AppCompatActivity
 
 
         addButton = (FloatingActionButton) findViewById(R.id.addevent_button);
-
-        Intent createIntent = new Intent(this, CreateEventActivity.class);
-
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,13 +53,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
-
-
-
-
-
-
+        TextView welcome = (TextView) findViewById(R.id.welcome_text);
+        TextView info_1 = (TextView) findViewById(R.id.info_text_1);
+        TextView info_2 = (TextView) findViewById(R.id.info_text_2);
+        Typeface custom_ft = Typeface.createFromAsset(getAssets(), "fonts/VintageOne.ttf");
+        welcome.setTypeface(custom_ft);
+        info_1.setTypeface(custom_ft);
+        info_2.setTypeface(custom_ft);
 
 
     }
