@@ -57,12 +57,8 @@ public class RegistrationFragment extends Fragment {
                 } else if (!password.equals(password2)) {
                     Toast.makeText(getActivity(), "The two passwords you entered are different", Toast.LENGTH_SHORT).show();
                 } else {
-                    try {
-                        DatabaseService.getDBService().signUp(username, password, first, last);
-                        getActivity().finish();
-                    } catch (Exception e) {
-                        Toast.makeText(getActivity(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
-                    }
+                    DatabaseService.getDBService().signUp(username, password, first, last, getActivity().getApplicationContext());
+                    getActivity().finish();
                 }
             }
         });

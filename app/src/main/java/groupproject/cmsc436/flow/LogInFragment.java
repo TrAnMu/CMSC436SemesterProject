@@ -77,11 +77,7 @@ public class LogInFragment extends Fragment {
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getActivity().getApplicationContext(), R.string.none_fields_blank, Toast.LENGTH_SHORT).show();
                 } else {
-                    try {
-                        DatabaseService.getDBService().signIn(email, password);
-                    } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
-                    }
+                    DatabaseService.getDBService().signIn(email, password, getActivity().getApplicationContext());
                 }
             }
         });
