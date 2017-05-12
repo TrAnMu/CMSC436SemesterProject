@@ -1,8 +1,10 @@
 package groupproject.cmsc436.flow.Service;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -138,8 +140,13 @@ public class DatabaseService {
     public static DatabaseService getDBService () {
         return instance;
     }
-    public void signUp(final String email, final String password, final String first, final String last) throws Exception {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+    public void signUp(final String email, final String password, final String first, final String last, final Context context) {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        })
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -147,33 +154,23 @@ public class DatabaseService {
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.d("EXCEPTION", task.toString());
-                            throw new IllegalArgumentException();
+                        if (task.isSuccessful()) {
+                            String key = task.getResult().getUser().getUid();
+                            UserInfo user = new UserInfo(key, email, first, last);
+                            userReference.child(key).setValue(user);
                         }
-                        String key = task.getResult().getUser().getUid();
-                        UserInfo user = new UserInfo(key, email, first, last);
-                        userReference.child(key).setValue(user);
                     }
                 });
+
     }
 
-    public void signIn(String email, String password) throws Exception{
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            throw new IllegalArgumentException();
-                        }
-
-                        // ...
-                    }
-                });
+    public void signIn(String email, String password, final Context context) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void signOut() {
